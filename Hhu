@@ -1,0 +1,366 @@
+[24/08, 06:06] Myn ♡: Simm! E esse tema é ótimo para um projeto de banco de dados, porque dá para criar várias entidades e relacionamentos sem ficar artificial. E como é um projeto do técnico, podemos montar tudo de um jeito que pareça um sistema real, mesmo que os jogos não sejam funcionais.
+
+Podemos fazer como se fosse uma plataforma chamada, por exemplo, GameKids — um site de jogos infantis no estilo Friv/OJogos.
+
+O ideal é começarmos pela entrevista, porque dela vamos tirar as informações para construir o minimundo. Depois você pode modificar o que quiser.
+
+🎮 1. Ideia geral do sistema
+
+O site teria:
+
+Jogos infantis de diferentes categorias;
+
+Usuários/cadastros;
+
+Categorias de jogos;
+
+Avaliações dos jogos;
+
+Favoritos;
+
+Histórico de jogos;
+
+Desenvolvedores responsáveis pelos jogos;
+
+Talvez comentários;
+
+Sistema de classificação por idade.
+
+
+E podemos decidir depois quais dessas coisas realmente entram no banco.
+
+📝 2. Entrevista — perguntas iniciais
+
+Eu faria uma entrevista fictícia com o responsável pelo site:
+
+Sobre os jogos
+
+1. Quais informações precisam ser cadastradas sobre cada jogo?
+
+
+2. Um jogo pode pertencer a mais de uma categoria?
+
+
+3. Todo jogo possui uma classificação indicativa?
+
+
+4. É necessário armazenar o desenvolvedor de cada jogo?
+
+
+5. Um desenvolvedor pode cadastrar vários jogos?
+
+
+6. Um jogo pode ser removido do site sem ser apagado definitivamente?
+
+
+
+Sobre os usuários 7. Os usuários precisam criar uma conta? 8. Quais informações são necessárias para realizar o cadastro? 9. Um usuário pode favoritar jogos? 10. Um usuário pode avaliar um jogo? 11. Um usuário pode avaliar o mesmo jogo mais de uma vez? 12. É necessário guardar o histórico de jogos acessados/jogados?
+
+Sobre avaliações e comentários 13. Os usuários podem deixar comentários? 14. Um comentário pode receber respostas? 15. Os comentários precisam passar por moderação? 16. O usuário pode alterar ou excluir sua avaliação?
+
+Sobre categorias 17. Quais categorias de jogos existirão? 18. Um jogo pode estar em várias categorias? 19. É possível criar novas categorias?
+
+Sobre o funcionamento do site 20. É possível pesquisar jogos pelo nome? 21. É possível filtrar jogos por categoria ou idade? 22. O site terá uma página com os jogos mais bem avaliados? 23. O site precisa registrar quantas vezes cada jogo foi acessado?
+
+
+---
+
+🧩 3. O que provavelmente vai surgir disso
+
+Depois das respostas, poderíamos chegar a entidades como:
+
+USUÁRIO
+
+id_usuario
+
+nome
+
+email
+
+senha
+
+data_cadastro
+
+
+JOGO
+
+id_jogo
+
+nome
+
+descrição
+
+data_publicacao
+
+classificação_indicativa
+
+imagem
+
+quantidade_acessos
+
+
+CATEGORIA
+
+id_categoria
+
+nome
+
+descrição
+
+
+DESENVOLVEDOR
+
+id_desenvolvedor
+
+nome
+
+email/site
+
+
+AVALIAÇÃO
+
+id_avaliacao
+
+nota
+
+comentário
+
+data_avaliacao
+
+
+FAVORITO
+
+id_usuario
+
+id_jogo
+
+data_adicionado
+
+
+E aí apareceriam relacionamentos como:
+
+> Usuário → realiza → Avaliação
+
+
+
+> Usuário → adiciona → Jogo aos Favoritos
+
+
+
+> Desenvolvedor → desenvolve → Jogo
+
+
+
+> Jogo → pertence a → Categoria
+
+
+
+E talvez uma tabela intermediária JOGO_CATEGORIA, caso um jogo possa pertencer a várias categorias.
+
+
+---
+
+Mas eu faria uma coisa antes de fecharmos isso: não vamos simplesmente inventar o banco inteiro de uma vez. Podemos fazer a entrevista primeiro, como se vocês realmente tivessem entrevistado o "cliente" que pediu o site.
+
+Aí, com as respostas, eu monto para você o minimundo completo, destacando entidades, atributos, relacionamentos, cardinalidades e regras de negócio. Depois você vai modificando para ficar com a cara do projeto de vocês.
+[24/08, 06:07] Myn ♡: Sim! Vamos fazer a entrevista completa, como se vocês estivessem entrevistando o cliente responsável pelo site de jogos infantis. Depois usamos as respostas para montar o minimundo.
+
+Vou deixar as perguntas organizadas por assunto, e você pode alterar, excluir ou acrescentar o que quiser.
+
+🎮 Entrevista — Site de Jogos Infantis
+
+1. Sobre o site
+
+1. Qual é o objetivo principal do site?
+
+
+2. Qual será o público-alvo do site?
+
+
+3. O site será destinado apenas para crianças ou também poderá ser utilizado por adolescentes e adultos?
+
+
+4. Será necessário criar uma conta para acessar os jogos?
+
+
+5. Usuários sem cadastro poderão acessar os jogos?
+
+
+
+2. Sobre os jogos
+
+6. Quais informações deverão ser cadastradas sobre cada jogo?
+
+
+7. Todo jogo terá nome, descrição e imagem?
+
+
+8. Será necessário informar a idade recomendada para cada jogo?
+
+
+9. Os jogos serão divididos em categorias?
+
+
+10. Um jogo poderá pertencer a mais de uma categoria?
+
+
+11. Quais categorias de jogos existirão?
+
+
+12. Será necessário informar quem desenvolveu cada jogo?
+
+
+13. Um desenvolvedor poderá ter vários jogos cadastrados?
+
+
+14. Será possível remover um jogo do site?
+
+
+15. Será necessário registrar a data em que o jogo foi cadastrado?
+
+
+16. O site deverá registrar quantas vezes cada jogo foi acessado?
+
+
+
+3. Sobre os usuários
+
+17. Quais informações serão necessárias para cadastrar um usuário?
+
+
+18. O usuário poderá escolher um nome de usuário?
+
+
+19. Será necessário cadastrar e-mail e senha?
+
+
+20. O usuário poderá alterar seus dados?
+
+
+21. O usuário poderá excluir sua conta?
+
+
+22. Usuários terão algum tipo de perfil diferente, como administrador e usuário comum?
+
+
+
+4. Sobre favoritos
+
+23. O usuário poderá adicionar jogos aos favoritos?
+
+
+24. Um usuário poderá favoritar vários jogos?
+
+
+25. Um mesmo jogo poderá estar nos favoritos de vários usuários?
+
+
+26. O usuário poderá remover um jogo dos favoritos?
+
+
+
+5. Sobre avaliações
+
+27. Os usuários poderão dar notas aos jogos?
+
+
+28. Qual será a escala de avaliação? De 1 a 5 estrelas, por exemplo?
+
+
+29. O usuário poderá avaliar qualquer jogo?
+
+
+30. Um usuário poderá avaliar o mesmo jogo mais de uma vez?
+
+
+31. O usuário poderá alterar sua avaliação?
+
+
+32. Será necessário guardar a data da avaliação?
+
+
+
+6. Sobre comentários
+
+33. Os usuários poderão comentar nos jogos?
+
+
+34. Um usuário poderá fazer vários comentários?
+
+
+35. Será possível excluir ou editar um comentário?
+
+
+36. Os administradores poderão remover comentários inadequados?
+
+
+37. Os comentários ficarão visíveis para todos os usuários?
+
+
+
+7. Sobre pesquisa e organização
+
+38. O usuário poderá pesquisar um jogo pelo nome?
+
+
+39. Será possível filtrar jogos por categoria?
+
+
+40. Será possível filtrar jogos pela faixa etária?
+
+
+41. O site terá uma área de "jogos mais populares"?
+
+
+42. O site terá uma área de "jogos mais bem avaliados"?
+
+
+43. O usuário poderá visualizar seu histórico de jogos acessados?
+
+
+
+8. Sobre administração
+
+44. Quem será responsável por cadastrar os jogos?
+
+
+45. Administradores poderão editar informações dos jogos?
+
+
+46. Administradores poderão excluir jogos?
+
+
+47. Administradores poderão criar e excluir categorias?
+
+
+48. Administradores poderão visualizar os usuários cadastrados?
+
+
+49. Administradores poderão moderar comentários e avaliações?
+
+
+
+9. Regras importantes
+
+50. Existe alguma informação que seja obrigatória no cadastro de um jogo?
+
+
+51. Existe alguma idade mínima para criar uma conta?
+
+
+52. Um jogo pode ser cadastrado sem pertencer a uma categoria?
+
+
+53. Um usuário pode avaliar um jogo sem ter uma conta?
+
+
+54. Existe algum limite para a quantidade de jogos que um usuário pode favoritar?
+
+
+
+
+---
+
+E uma coisa importante: não precisa responder tudo de uma vez. Podemos fazer a entrevista como uma conversa mesmo, pergunta por pergunta, e eu vou organizando as respostas. No final, transformo tudo no minimundo.
+
+Podemos começar pela pergunta 1: qual é o objetivo principal do site?
