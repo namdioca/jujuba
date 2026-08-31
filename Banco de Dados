@@ -1,0 +1,83 @@
+CREATE TABLE Usuarios ( 
+id_usuario int PRIMARY KEY AUTO_INCREMENT, 
+nome_usuario varchar (100) NOT NULL, 
+email varchar (100) UNIQUE NOT NULL, 
+senha varchar (250) NOT NULL, 
+data_nascimento DATE NOT NULL,
+status ENUM ('ativo','inativo','banido') NOT NULL DEFAULT 'ativo', created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CHECK (CHAR_LENGTH(nome_usuario) > 5)
+) ENGINE=InnoDB; 
+ CREATE TABLE Desenvolvedoras ( 
+id_desenvolvedora INT PRIMARY KEY AUTO_INCREMENT, 
+nome varchar (50) NOT NULL, 
+data_fundacao date NOT NULL, 
+pais VARCHAR (45) NOT NULL 
+) ENGINE=InnoDB; 
+CREATE TABLE Categorias ( 
+id_categoria INT PRIMARY KEY AUTO_INCREMENT, 
+nome VARCHAR(100) NOT NULL 
+) ENGINE=InnoDB; 
+CREATE TABLE Jogos ( 
+id_jogo INT PRIMARY KEY AUTO_INCREMENT,
+id_categoria INT NOT NULL,
+id_desenvolvedora INT NOT NULL, 
+titulo varchar (100) NOT NULL, 
+descricao varchar (250) NOT NULL , 
+data_lancamento DATE NOT NULL, 
+faixa_etaria VARCHAR(3) NOT NULL,
+FOREIGN KEY (id_desenvolvedora) REFERENCES desenvolvedoras (id_desenvolvedora), 
+FOREIGN KEY (id_categoria) REFERENCES Categorias (id_categoria) 
+) ENGINE=InnoDB; 
+
+
+CREATE TABLE Jogos_categorias ( 
+id_JogoCategoria INT PRIMARY KEY AUTO_INCREMENT, 
+id_jogo INT NOT NULL UNIQUE, 
+id_categoria INT NOT NULL UNIQUE, 
+FOREIGN KEY (id_jogo) REFERENCES Jogos (id_jogo), 
+FOREIGN KEY (id_categoria) REFERENCES Categorias (id_categoria) 
+)ENGINE=InnoDB; 
+
+CREATE TABLE Biblioteca ( 
+id_biblioteca int PRIMARY KEY AUTO_INCREMENT, 
+id_usuario INT NOT NULL UNIQUE, 
+id_jogo INT NOT NULL UNIQUE,
+FOREIGN KEY (id_usuario) REFERENCES Usuarios (id_usuario), 
+FOREIGN KEY (id_jogo) REFERENCES Jogos (id_jogo) 
+) ENGINE=InnoDB; 
+
+CREATE TABLE suporte( 
+id_suporte INT PRIMARY KEY AUTO_INCREMENT, 
+id_usuario INT NOT NULL, 
+assunto VARCHAR (150) NOT NULL, 
+descricao TEXT NOT NULL, 
+status ENUM ('Aberto','Pendente','Resolvido','Fechado') NOT NULL, data_abertura DATETIME DEFAULT CURRENT_TIMESTAMP, 
+data_fechamento DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario) 
+) ENGINE=INNODB; 
+
+CREATE TABLE suporte_mensagens ( 
+id_mensagem INT PRIMARY KEY AUTO_INCREMENT, 
+id_suporte INT NOT NULL, 
+id_usuario INT NOT NULL, 
+mensagem TEXT NOT NULL, 
+data_envio DATETIME DEFAULT CURRENT_TIMESTAMP, 
+FOREIGN KEY (id_suporte) REFERENCES suporte (id_suporte), 
+FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario) 
+) ENGINE=INNODB;
+
+
+CREATE TABLE Administradores ( 
+id_admin INT PRIMARY KEY AUTO_INCREMENT, 
+id_usuario INT NOT NULL UNIQUE, 
+cargo ENUM ('moderador','suporte','gerente','desenvolvedor', 'super_admin') NOT NULL DEFAULT 'moderador', 
+permissao_banir BOOLEAN DEFAULT TRUE, 
+permissao_editar_jogos BOOLEAN DEFAULT FALSE, 
+permissao_suporte BOOLEAN DEFAULT TRUE, 
+permissao_gerenciar_usuarios BOOLEAN DEFAULT FALSE, 
+gerenciar_admins BOOLEAN DEFAULT FALSE, 
+ativo BOOLEAN DEFAULT TRUE, 
+ultimo_login DATETIME NULL, 
+criado TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario) ON DELETE RESTRICT 
+)ENGINE=INNODB;
