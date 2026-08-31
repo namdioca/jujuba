@@ -1,0 +1,54 @@
+A loja realiza atualmente o controle de entrega de jogos digitais de forma
+descentralizada, apoiando-se em planilhas eletrônicas, anotações digitais e
+registros manuais de entrada. Essa estrutura informal compromete a eficiência
+operacional e a confiabilidade das informações gerenciais, gerando problemas
+recorrentes como:
+• Desorganização no quesito idade recomendada;
+• Impossibilidade de manter registros completos e simultâneos sobre todos os
+usuários;
+• Ausência de relatórios consolidados sobre o catálogo e o desempenho dos
+jogos.
+Diante dessas dificuldades, os proprietários identificaram a necessidade de
+implantação de um sistema informatizado e centralizado, capaz de:
+• Organizar os cadastros de jogos e suas respectivas categorias;
+• Automatizar o controle da biblioteca de produtos digitais;
+• Restringir o acesso de usuários mediante a identificação de irregularidades;
+• Oferecer visibilidade completa sobre todos os usuários cadastrados.
+O sistema proposto consiste em uma aplicação web de gestão comercial,
+estruturada sobre o padrão arquitetural MVC (Model-View-Controller)**,
+com foco na organização das informações e na facilidade de navegação. A plataforma
+será somente disponibilizada em ambiente online.
+O sistema contemplará o gerenciamento dos seguintes processos:
+• Autenticação e controle de usuários;
+• Catálogo de jogos personalizado conforme as preferências do usuário;
+• Registro de entrada de jogos na biblioteca;
+No contexto do estudo de caso, destacam-se as seguintes entidades
+principais:
+Usuário: Principal agente do sistema, podendo atuar como administrador ou
+comprador
+Jogo: Bem digital comercializado pela loja, categorizado por gênero
+Fornecedor: Empresas responsáveis pela disponibilização dos jogos na
+plataforma
+Categoria: Seção onde separa varios jogos em comum.
+Essas entidades interagem de forma integrada, refletindo o funcionamento
+real do negócio e priorizando a responsividade e o conforto visual do usuário.
+As seguintes regras de negócio foram levantadas durante a etapa de entrevista
+com os proprietários:
+• Os jogos devem estar disponíveis para uso 24 horas por dia;
+• Somente administradores podem realizar alterações significativas no sistema;
+• Todas as senhas de usuário devem ser armazenadas de forma criptografada;
+Essas regras garantem a integridade operacional e a confiabilidade das
+informações trafegadas no sistema.
+Com a implantação do sistema, espera-se alcançar:
+• Redução dos erros operacionais no processo de download e controle;
+• Geração de dados sobre as preferências dos usuários para melhoria contínua do
+catálogo;
+• Preservação segura dos dados pessoais e de compra dos usuários;
+• Melhoria geral na experiência e no relacionamento com os clientes.
+O estudo de caso apresentado descreve um cenário típico de organizações
+comerciais de pequeno porte que, embora possuam processos bem definidos em
+seu cotidiano, carecem de ferramentas adequadas para o gerenciamento eficiente
+das informações. O sistema de Gestão para Loja de Jogos Eletrônicos surge como
+uma solução alinhada às necessidades reais do negócio, respeitando práticas
+consolidadas da Engenharia de Software e servindo como base estrutural para as
+próximas etapas do projeto.
