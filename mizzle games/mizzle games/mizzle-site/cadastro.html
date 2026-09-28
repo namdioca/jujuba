@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar conta — Mizzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <form class="form-card" id="cadastro-form">
+      <div class="form-card-header">Criar conta na Mizzle</div>
+      <div class="form-card-body">
+        <div class="field">
+          <label for="usuario">Nome de usuário</label>
+          <input id="usuario" name="usuario" required />
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="senha">Senha</label>
+            <input id="senha" name="senha" type="password" required />
+          </div>
+          <div class="field">
+            <label for="confirmarSenha">Confirmar senha</label>
+            <input id="confirmarSenha" name="confirmarSenha" type="password" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="nascimento">Data de nascimento (do responsável)</label>
+          <input id="nascimento" name="nascimento" type="date" required />
+        </div>
+        <div class="checkbox-row">
+          <input id="termos" type="checkbox" required />
+          <label for="termos">Li e aceito os termos de uso da Mizzle</label>
+        </div>
+        <button class="btn-primary" type="submit">Criar conta</button>
+        <p class="form-note">Já tem conta? <a class="link-muted" href="login.html">Entrar</a></p>
+      </div>
+      <div class="form-card-footer"></div>
+    </form>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/fallback-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script>
+    Store.seedGamesIfNeeded().then(Pages.initCadastro);
+  </script>
+</body>
+</html>

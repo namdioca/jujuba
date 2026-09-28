@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho — Mizzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <h1 class="page-title">Seu carrinho</h1>
+    <div class="cart-layout">
+      <div id="cart-items"></div>
+      <aside class="summary-card">
+        <div class="summary-header">Resumo do pedido</div>
+        <div class="summary-body" id="cart-summary-body"></div>
+        <div style="padding: 0 20px 20px;">
+          <button class="btn-primary" id="go-checkout" onclick="location.href='checkout.html'">Continuar para pagamento</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/fallback-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script>
+    Store.seedGamesIfNeeded().then(Pages.initCarrinho);
+  </script>
+</body>
+</html>

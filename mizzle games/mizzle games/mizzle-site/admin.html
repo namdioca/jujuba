@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel administrativo — Mizzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <!-- Login do administrador -->
+    <div class="admin-login" id="admin-login-wrap">
+      <h2 style="margin-top:0">Acesso administrativo</h2>
+      <form id="admin-login-form">
+        <div class="field">
+          <label for="admin-senha">Senha de administrador</label>
+          <input id="admin-senha" name="senha" type="password" required />
+        </div>
+        <button class="btn-primary" type="submit">Entrar</button>
+        <p class="form-note">Senha de demonstração: <code>mizzle123</code></p>
+      </form>
+    </div>
+
+    <!-- Painel -->
+    <div class="admin-shell" id="admin-panel-wrap" style="display:none;">
+      <div class="admin-card">
+        <div class="admin-card-header" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Painel administrativo — Mizzle</span>
+          <button id="admin-logout" type="button" style="background:none;border:1px solid #fff;color:#fff;border-radius:5px;padding:6px 14px;cursor:pointer;">Sair</button>
+        </div>
+        <div class="admin-card-body">
+          <h1 class="admin-title" id="form-title">Adicionar jogo</h1>
+          <form id="game-form">
+            <input type="hidden" name="gameId" />
+            <div class="admin-grid">
+              <div class="upload-col">
+                <label class="upload-box" id="upload-preview" for="upload-input">
+                  <span class="plus">+</span>
+                  <span>Upload do jogo</span>
+                </label>
+                <input id="upload-input" type="file" accept="image/*" style="display:none" onchange="Pages.handleUploadChange(this)" />
+              </div>
+
+              <div class="field">
+                <label for="nome">Nome do jogo</label>
+                <input id="nome" name="nome" required />
+              </div>
+              <div class="field">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" name="categoria" required>
+                  <option value="">Selecione</option>
+                  <option value="maquiagem">Maquiagem</option>
+                  <option value="acao">Ação</option>
+                  <option value="cozinha">Cozinha</option>
+                  <option value="aventura">Aventura</option>
+                  <option value="educativo">Educativo</option>
+                  <option value="quebra-cabeca">Quebra-cabeça</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+              </div>
+              <div class="field">
+                <label for="faixa">Faixa etária</label>
+                <select id="faixa" name="faixa" required>
+                  <option value="">Selecione</option>
+                  <option value="0-5">0 a 5 anos</option>
+                  <option value="6-8">6 a 8 anos</option>
+                  <option value="9-12">9 a 12 anos</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="desenvolvedor">Desenvolvedor</label>
+                <input id="desenvolvedor" name="desenvolvedor" required />
+              </div>
+              <div class="field">
+                <label for="preco">Preço (R$)</label>
+                <input id="preco" name="preco" type="number" min="0" step="0.10" required />
+              </div>
+            </div>
+
+            <hr class="divider" />
+            <div style="display:flex;gap:14px;justify-content:flex-end;">
+              <button type="button" class="btn-danger" id="form-cancel" style="width:auto;padding:13px 28px;">Cancelar</button>
+              <button type="submit" class="btn-publish" id="publish-btn">Publicar</button>
+            </div>
+            <div style="clear:both"></div>
+          </form>
+
+          <div class="admin-list" id="admin-list"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/fallback-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script>
+    Store.seedGamesIfNeeded().then(Pages.initAdmin);
+  </script>
+</body>
+</html>

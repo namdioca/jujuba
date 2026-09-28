@@ -1,0 +1,197 @@
+/* Copia embutida de data/games.json, usada apenas quando o navegador
+   bloqueia fetch() de arquivos locais (ex: abrindo o site com duplo clique).
+   Ao hospedar em um servidor, data/games.json é sempre usado. */
+window.MIZZLE_FALLBACK_GAMES = [
+  {
+    "id": "g001",
+    "nome": "Salão da Bella",
+    "categoria": "maquiagem",
+    "faixa": "6-8",
+    "preco": 12.9,
+    "desenvolvedor": "Doce Studio",
+    "descricao": "Monte penteados, escolha maquiagens e crie looks incríveis para a Bella em um salão de beleza cheio de cores.",
+    "cor": "#ffa3e8",
+    "emoji": "💄",
+    "destaque": true
+  },
+  {
+    "id": "g002",
+    "nome": "Princesas em Cores",
+    "categoria": "maquiagem",
+    "faixa": "0-5",
+    "preco": 9.9,
+    "desenvolvedor": "Doce Studio",
+    "descricao": "Pinte vestidos, escolha coroas e combine acessórios para deixar cada princesa com um visual único.",
+    "cor": "#feb8e9",
+    "emoji": "👑",
+    "destaque": true
+  },
+  {
+    "id": "g003",
+    "nome": "Spa das Fadas",
+    "categoria": "maquiagem",
+    "faixa": "6-8",
+    "preco": 11.9,
+    "desenvolvedor": "Pixel Doce",
+    "descricao": "Cuide das fadinhas em um spa mágico: banho de bolhas, cabelo brilhante e maquiagem de purpurina.",
+    "cor": "#c7b8fe",
+    "emoji": "🧚",
+    "destaque": false
+  },
+  {
+    "id": "g004",
+    "nome": "Heróis da Cidade",
+    "categoria": "acao",
+    "faixa": "9-12",
+    "preco": 16.9,
+    "desenvolvedor": "Trovão Games",
+    "descricao": "Corra pelos telhados, desvie de obstáculos e salve a cidade em fases cheias de adrenalina.",
+    "cor": "#93b5ff",
+    "emoji": "🦸",
+    "destaque": true
+  },
+  {
+    "id": "g005",
+    "nome": "Piratas da Ilha Perdida",
+    "categoria": "acao",
+    "faixa": "6-8",
+    "preco": 14.9,
+    "desenvolvedor": "Trovão Games",
+    "descricao": "Navegue mares desconhecidos, encontre tesouros escondidos e enfrente desafios em cada ilha.",
+    "cor": "#a5fdeb",
+    "emoji": "🏴‍☠️",
+    "destaque": false
+  },
+  {
+    "id": "g006",
+    "nome": "Corrida das Estrelas",
+    "categoria": "acao",
+    "faixa": "9-12",
+    "preco": 15.9,
+    "desenvolvedor": "Foguete Interativo",
+    "descricao": "Pilote naves coloridas em pistas espaciais e desbloqueie novos veículos a cada vitória.",
+    "cor": "#ff9393",
+    "emoji": "🚀",
+    "destaque": false
+  },
+  {
+    "id": "g007",
+    "nome": "Pizzaria da Mia",
+    "categoria": "cozinha",
+    "faixa": "6-8",
+    "preco": 13.9,
+    "desenvolvedor": "Panela Feliz",
+    "descricao": "Prepare pizzas, escolha coberturas e sirva clientes famintos antes que o tempo acabe.",
+    "cor": "#f6b599",
+    "emoji": "🍕",
+    "destaque": true
+  },
+  {
+    "id": "g008",
+    "nome": "Doceria Arco-Íris",
+    "categoria": "cozinha",
+    "faixa": "0-5",
+    "preco": 10.9,
+    "desenvolvedor": "Panela Feliz",
+    "descricao": "Misture ingredientes coloridos e monte cupcakes, bolos e picolés fofinhos.",
+    "cor": "#b6f6b6",
+    "emoji": "🧁",
+    "destaque": false
+  },
+  {
+    "id": "g009",
+    "nome": "Chef Mirim",
+    "categoria": "cozinha",
+    "faixa": "9-12",
+    "preco": 17.9,
+    "desenvolvedor": "Panela Feliz",
+    "descricao": "Participe de um campeonato de culinária com receitas de várias partes do mundo.",
+    "cor": "#b8e3fe",
+    "emoji": "👩‍🍳",
+    "destaque": false
+  },
+  {
+    "id": "g010",
+    "nome": "Floresta Encantada",
+    "categoria": "aventura",
+    "faixa": "0-5",
+    "preco": 8.9,
+    "desenvolvedor": "Semente Games",
+    "descricao": "Explore uma floresta cheia de animais amigos e pequenos mistérios para descobrir.",
+    "cor": "#b3fbad",
+    "emoji": "🌳",
+    "destaque": false
+  },
+  {
+    "id": "g011",
+    "nome": "Ilha dos Dinossauros",
+    "categoria": "aventura",
+    "faixa": "6-8",
+    "preco": 15.9,
+    "desenvolvedor": "Semente Games",
+    "descricao": "Cuide de filhotes de dinossauro, explore vulcões e monte seu próprio parque pré-histórico.",
+    "cor": "#c7b8fe",
+    "emoji": "🦕",
+    "destaque": false
+  },
+  {
+    "id": "g012",
+    "nome": "Mistério do Castelo",
+    "categoria": "aventura",
+    "faixa": "9-12",
+    "preco": 18.9,
+    "desenvolvedor": "Lanterna Estúdio",
+    "descricao": "Resolva enigmas, encontre chaves escondidas e desvende o segredo do castelo assombrado.",
+    "cor": "#ffa3e8",
+    "emoji": "🏰",
+    "destaque": false
+  },
+  {
+    "id": "g013",
+    "nome": "Números Divertidos",
+    "categoria": "educativo",
+    "faixa": "0-5",
+    "preco": 7.9,
+    "desenvolvedor": "Aprender Brincando",
+    "descricao": "Aprenda a contar, somar e reconhecer números com jogos coloridos e sons divertidos.",
+    "cor": "#93b5ff",
+    "emoji": "🔢",
+    "destaque": false
+  },
+  {
+    "id": "g014",
+    "nome": "Alfabeto Mágico",
+    "categoria": "educativo",
+    "faixa": "6-8",
+    "preco": 9.9,
+    "desenvolvedor": "Aprender Brincando",
+    "descricao": "Monte palavras, forme frases e desbloqueie histórias interativas letra por letra.",
+    "cor": "#a5fdeb",
+    "emoji": "🔤",
+    "destaque": false
+  },
+  {
+    "id": "g015",
+    "nome": "Quebra-Cabeça Cósmico",
+    "categoria": "quebra-cabeca",
+    "faixa": "9-12",
+    "preco": 12.9,
+    "desenvolvedor": "Foguete Interativo",
+    "descricao": "Monte planetas, constelações e naves em quebra-cabeças com centenas de peças.",
+    "cor": "#c7b8fe",
+    "emoji": "🧩",
+    "destaque": false
+  },
+  {
+    "id": "g016",
+    "nome": "Fazendinha Feliz",
+    "categoria": "quebra-cabeca",
+    "faixa": "0-5",
+    "preco": 8.9,
+    "desenvolvedor": "Semente Games",
+    "descricao": "Encaixe peças de animais da fazenda e aprenda os sons de cada bichinho.",
+    "cor": "#f6b599",
+    "emoji": "🐮",
+    "destaque": false
+  }
+];

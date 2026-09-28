@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha Biblioteca | Mizzle</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Merriweather+Sans:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main class="library-container">
+    <div class="library-header">
+      <h1>Minha Biblioteca de Jogos</h1>
+      <p>Aqui estão todos os seus jogos adquiridos no Mizzle. Divirta-se quando quiser!</p>
+    </div>
+
+    <!-- Lista de jogos adquiridos -->
+    <div id="library-games-grid" class="library-grid"></div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/fallback-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+
+  <script>
+   
+`<nav class="sub-nav">
+  <div class="nav-links-left">
+    <a href="catalogo.html?faixa=3-5">Jogos 3–5</a>
+    <a href="catalogo.html?faixa=6-8">Jogos 6–8</a>
+    <a href="catalogo.html?faixa=9-12">Jogos 9–12</a>
+  </div>
+  <div class="nav-links-right">
+    <a href="biblioteca.html" class="nav-library-link"> Minha Biblioteca</a>
+  </div>
+</nav>`
+    if (typeof UI !== 'undefined') {
+      UI.renderHeader();
+      UI.renderFooter();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+     
+      const currentUser = Store.getCurrentUser ? Store.getCurrentUser() : JSON.parse(localStorage.getItem('mizzle_user'));
+      
+      if (!currentUser) {
+        alert('Você precisa estar logado para acessar sua Biblioteca de Jogos!');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const libraryGrid = document.getElementById('library-games-grid');
+      const userLibrary = Store.getUserLibrary ? Store.getUserLibrary() : JSON.parse(localStorage.getItem('mizzle_library') || '[]');
+
+      if (userLibrary.length === 0) {
+        libraryGrid.innerHTML = `
+          <div class="empty-library">
+            <h2>Sua biblioteca está vazia</h2>
+            <p>Você ainda não adquiriu nenhum jogo. Explore nosso catálogo e encontre diversão para todas as idades!</p>
+            <a href="catalogo.html" class="btn-primary-mizzle">Ver Jogos Disponíveis</a>
+          </div>
+        `;
+        return;
+      }
+
+      
+      libraryGrid.innerHTML = userLibrary.map(game => `
+        <div class="library-card">
+          <div class="library-card-media">
+            ${game.imagem ? `<img src="${game.imagem}" alt="${game.nome}" />` : `<span class="game-emoji">${game.emoji || '🎮'}</span>`}
+          </div>
+          <div class="library-card-body">
+            <h3>${game.nome}</h3>
+            <span class="badge-age">Faixa: ${UI.ageLabel ? UI.ageLabel(game.faixa) : game.faixa}</span>
+            <button class="btn-play" onclick="alert('Iniciando o jogo ${game.nome}! Divirta-se!')">▶ Jogar Agora</button>
+          </div>
+        </div>
+      `).join('');
+    });
+  </script>
+
+</body>
+</html>

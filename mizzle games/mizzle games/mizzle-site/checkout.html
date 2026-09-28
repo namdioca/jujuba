@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento — Mizzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="stepper">
+    <div class="step"><div class="step-circle">1</div> Carrinho</div>
+    <div class="step-line"></div>
+    <div class="step active"><div class="step-circle">2</div> Pagamento</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-circle">3</div> Confirmação</div>
+  </div>
+
+  <main>
+    <div class="cart-layout">
+      <form class="form-card" style="margin:0;" id="checkout-form">
+        <div class="form-card-header">💳 Pagamento</div>
+        <div class="form-card-body">
+          <h3 style="margin-top:0">Dados do comprador</h3>
+          <div class="field-row">
+            <div class="field"><label for="nome">Nome completo</label><input id="nome" name="nome" required /></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" required /></div>
+            <div class="field"><label for="telefone">Telefone</label><input id="telefone" name="telefone" /></div>
+          </div>
+          <div class="field"><label for="cpf">CPF</label><input id="cpf" name="cpf" /></div>
+
+          <hr class="divider" />
+          <h3 style="margin-top:0">Forma de pagamento</h3>
+          <div class="pay-tabs">
+            <div class="pay-tab active" data-pay="credito">Cartão de Crédito</div>
+            <div class="pay-tab" data-pay="debito">Cartão de Débito</div>
+            <div class="pay-tab" data-pay="boleto">Boleto</div>
+            <div class="pay-tab" data-pay="pix">Pix</div>
+          </div>
+
+          <div class="pay-panel active" id="panel-credito">
+            <div class="field"><label>Número do cartão</label><input placeholder="0000 0000 0000 0000" /></div>
+            <div class="field-row">
+              <div class="field"><label>Nome no cartão</label><input /></div>
+              <div class="field" style="max-width:120px"><label>Validade</label><input placeholder="MM/AA" /></div>
+              <div class="field" style="max-width:100px"><label>CVV</label><input placeholder="000" /></div>
+            </div>
+          </div>
+
+          <div class="pay-panel" id="panel-debito">
+            <div class="field"><label>Número do cartão</label><input placeholder="0000 0000 0000 0000" /></div>
+            <div class="field-row">
+              <div class="field"><label>Nome no cartão</label><input /></div>
+              <div class="field" style="max-width:120px"><label>Validade</label><input placeholder="MM/AA" /></div>
+              <div class="field" style="max-width:100px"><label>CVV</label><input placeholder="000" /></div>
+            </div>
+          </div>
+
+          <div class="pay-panel" id="panel-boleto">
+            <p style="color:var(--text-light)">O boleto será gerado após a confirmação e vence em 3 dias úteis.</p>
+          </div>
+
+          <div class="pay-panel" id="panel-pix">
+            <div class="qr-box"></div>
+            <p style="text-align:center;color:var(--text-light)">Abra o app do seu banco, escaneie o QR Code e pague. A aprovação acontece em poucos segundos.</p>
+          </div>
+
+          <div class="checkout-actions">
+            <button type="button" class="btn-secondary" onclick="location.href='carrinho.html'">Voltar ao carrinho</button>
+            <button type="submit" class="btn-primary">Finalizar pagamento</button>
+          </div>
+        </div>
+      </form>
+
+      <aside class="summary-card">
+        <div class="summary-header">Resumo do pedido</div>
+        <div class="summary-body" id="checkout-summary"></div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/fallback-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script>
+    Store.seedGamesIfNeeded().then(Pages.initCheckout);
+  </script>
+</body>
+</html>

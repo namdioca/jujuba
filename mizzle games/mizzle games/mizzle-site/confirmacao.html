@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedido confirmado — Mizzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="stepper">
+    <div class="step"><div class="step-circle">1</div> Carrinho</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-circle">2</div> Pagamento</div>
+    <div class="step-line"></div>
+    <div class="step active"><div class="step-circle">3</div> Confirmação</div>
+  </div>
+
+  <main>
+    <div id="confirm-wrap"></div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/fallback-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script>
+    Store.seedGamesIfNeeded().then(Pages.initConfirmacao);
+  </script>
+</body>
+</html>

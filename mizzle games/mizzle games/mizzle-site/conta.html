@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha conta | Mizzle</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main class="account-page-wrapper">
+    <div class="account-card-custom">
+      
+      <div class="card-purple-header">
+        <img src="imagens mizzle/logomizzle.png" alt="Logo Mizzle" class="card-logo" />
+      </div>
+
+      <div class="card-white-body">
+        <div class="buttons-container">
+          <button type="button" class="btn-pink-edit" onclick="abrirModalFoto()">Editar foto de perfil</button>
+          <button type="button" class="btn-pink-edit" onclick="abrirModal('nome de usuário')">Editar nome de usuário</button>
+          <button type="button" class="btn-pink-edit" onclick="abrirModal('data de nascimento')">Editar data de nascimento</button>
+          <button type="button" class="btn-pink-edit" onclick="abrirModal('senha')">Editar senha</button>
+          <button type="button" class="btn-pink-edit" onclick="abrirModal('email')">Editar email</button>
+          <button type="button" class="btn-logout" onclick="fazerLogout()">Sair da conta</button>
+        </div>
+      </div>
+
+      <div class="card-purple-footer"></div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">© Mizzle Games</footer>
+
+  <!-- Modal de Texto -->
+  <div id="edit-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h3 id="modal-title" style="margin-top:0; font-family:'Fredoka', sans-serif; color:#8372FF;">Editar Informação</h3>
+      <input type="text" id="modal-input" placeholder="Digite aqui a nova informação..." />
+      <div class="modal-actions">
+        <button type="button" class="btn-save" onclick="salvarAlteracao()">Confirmar</button>
+        <button type="button" class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Foto -->
+  <div id="photo-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h3 style="margin-top:0; font-family:'Fredoka', sans-serif; color:#8372FF;">Editar Foto de Perfil</h3>
+      <input type="file" id="photo-input" accept="image/*" style="margin: 20px 0; width: 100%;" />
+      <div class="modal-actions">
+        <button type="button" class="btn-save" onclick="salvarFoto()">Confirmar</button>
+        <button type="button" class="btn-cancel" onclick="fecharModalFoto()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  
+  <script>
+    // 🔒 VERIFICAÇÃO SILENCIOSA E SEGURA DE LOGIN
+    (function verificarLogin() {
+      const keys = ['session', 'user', 'usuario', 'currentUser', 'mizzleSession', 'mizzleUser', 'isLoggedIn', 'logado'];
+      let logado = false;
+
+      for (const key of keys) {
+        const raw = localStorage.getItem(key);
+        if (raw && raw !== 'null' && raw !== 'undefined' && raw !== 'false') {
+          logado = true;
+          break;
+        }
+      }
+
+      // Se não estiver logado, envia para a página de login
+      if (!logado) {
+        window.location.replace('login.html');
+      }
+    })();
+  
+    if (typeof UI !== 'undefined' && UI.renderHeader) {
+      UI.renderHeader();
+    }
+
+    function abrirModal(campo) {
+      document.getElementById('modal-title').textContent = 'Editar ' + campo;
+      document.getElementById('modal-input').value = ''; 
+      document.getElementById('edit-modal').classList.remove('hidden');
+    }
+
+    function fecharModal() {
+      document.getElementById('edit-modal').classList.add('hidden');
+    }
+
+    function salvarAlteracao() {
+      const valor = document.getElementById('modal-input').value;
+      if (valor.trim() === '') {
+        alert('Por favor, digite um valor válido.');
+        return;
+      }
+      alert('Alterado com sucesso!');
+      fecharModal();
+    }
+
+    function fazerLogout() {
+      if (confirm("Tem certeza que deseja sair da sua conta?")) {
+        const keys = ['session', 'user', 'usuario', 'currentUser', 'mizzleSession', 'mizzleUser', 'isLoggedIn', 'logado', 'userAvatar'];
+        for (const key of keys) {
+          localStorage.removeItem(key);
+        }
+        window.location.href = 'login.html';
+      }
+    }
+
+    function abrirModalFoto() {
+      document.getElementById('photo-input').value = ''; 
+      document.getElementById('photo-modal').classList.remove('hidden');
+    }
+
+    function fecharModalFoto() {
+      document.getElementById('photo-modal').classList.add('hidden');
+    }
+
+    function salvarFoto() {
+      const input = document.getElementById('photo-input');
+      if (input.files.length === 0) {
+        alert('Por favor, selecione uma foto de imagem!');
+        return;
+      }
+
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        const fotoBase64 = e.target.result;
+        
+        // Salva a imagem no localStorage
+        localStorage.setItem('userAvatar', fotoBase64);
+
+        // Garante que a chave de usuário exista para o Store/UI reconhecerem
+        if (!localStorage.getItem('user')) {
+          localStorage.setItem('user', JSON.stringify({ logado: true }));
+        }
+        
+        alert('Foto de perfil atualizada com sucesso!');
+        fecharModalFoto();
+
+        // Atualiza o cabeçalho imediatamente
+        if (typeof UI !== 'undefined' && UI.renderHeader) {
+          UI.renderHeader();
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>

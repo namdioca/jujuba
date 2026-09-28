@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo | Mizzle</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Merriweather+Sans:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main class="game-page-container">
+    <p class="breadcrumb-custom">
+      <a href="index.html">Início</a> / <a href="catalogo.html">Jogos</a> / <span id="game-breadcrumb-title">Detalhes</span>
+    </p>
+
+    <div id="jogo-conteudo"></div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/fallback-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+
+  <script>
+    // 🎨 Renderiza o Cabeçalho e o Rodapé
+    if (typeof UI !== 'undefined') {
+      UI.renderHeader();
+      UI.renderFooter();
+    }
+
+    // Renderização dos detalhes do jogo
+    Store.seedGamesIfNeeded().then(() => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const game = Store.getGameById(id);
+
+      const container = document.getElementById('jogo-conteudo');
+      const breadcrumbTitle = document.getElementById('game-breadcrumb-title');
+
+      if (game) {
+        if (breadcrumbTitle) breadcrumbTitle.textContent = game.nome;
+
+        const coverHtml = game.imagem
+          ? `<img src="${game.imagem}" alt="${game.nome}" />`
+          : `<div style="font-size: 5rem;">${game.emoji || '🎮'}</div>`;
+
+        container.innerHTML = `
+          <div class="game-details-card">
+            <div class="game-media-wrapper">
+              ${coverHtml}
+            </div>
+            <div class="game-info-wrapper">
+              <div>
+                <h1 class="game-title-custom">${game.nome}</h1>
+                <div class="game-tags">
+                  <span class="game-tag-badge">${UI.categoryLabel(game.categoria)}</span>
+                  <span class="game-tag-badge">Faixa: ${UI.ageLabel(game.faixa)}</span>
+                </div>
+                <p class="game-description-text">
+                  ${game.descricao || 'Prepare-se para uma aventura incrível neste jogo do Mizzle! Desenvolvido para garantir a diversão e a imaginação das crianças.'}
+                </p>
+              </div>
+
+              <div class="game-price-action">
+                <span class="game-price-value">${UI.priceLabel(game.preco)}</span>
+                <button class="btn-buy-game" onclick="UI.quickAdd('${game.id}', this)">+ Adicionar ao Carrinho</button>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 50px 20px;">
+            <h2 style="font-family:'Fredoka', sans-serif; color: #8372FF;">Ops! Jogo não encontrado.</h2>
+            <p style="font-family:'Merriweather Sans', sans-serif; color: #666;">Parece que esse jogo não está disponível no nosso catálogo.</p>
+            <a href="catalogo.html" style="color: #FF77A9; font-weight: bold; text-decoration: none;">Voltar para o catálogo</a>
+          </div>
+        `;
+      }
+    });
+  </script>
+
+</body>
+</html>
