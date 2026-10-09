@@ -1,3 +1,4 @@
+
 ## Sobre o Projeto
 
 O **Mizzle** é uma plataforma de jogos digitais desenvolvida utilizando a arquitetura **MVC (Model-View-Controller)** com **PHP** e **MySQL**. O sistema permite que usuários criem contas, realizem login, pesquisem jogos, visualizem informações detalhadas, adicionem títulos ao carrinho, efetuem compras, gerenciem sua biblioteca pessoal e entrem em contato com o suporte. O objetivo do projeto é simular uma loja virtual de jogos, aplicando boas práticas de organização de código, separação de responsabilidades e integração com banco de dados relacional.
